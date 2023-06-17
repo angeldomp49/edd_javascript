@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import CreateProjectForm from '../CreateProjectForm';
 import { Dispatcher } from '@makechtec/event_engine/dist/dispatcher/Dispatcher';
 import { packagePrefix } from '../../events/packagePrefix';
 import { ClearFormEvent } from '../../events/createProject/ClearFormEvent';
 import { RefreshPageEvent } from '../../events/refresh/RefreshPageEvent';
 import { SubmitCreateEvent } from '../../events/createProject/SubmitCreateEvent';
+import { CreateProjectFormCreator } from '../../creators/CreateProjectFormCreator';
 
 
-const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
+const CreateProjectPage = ({dispatcher, createProjectFormCreator}: {dispatcher: Dispatcher, createProjectFormCreator: CreateProjectFormCreator}) => {
 
     const internalDispatcher: Dispatcher = new Dispatcher();
 
@@ -15,6 +16,9 @@ const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
 
     const createProjectFormId: number = 100;
     const createProjectFormId2: number = 200;
+
+    const form1 = createProjectFormCreator({dispatcher: internalDispatcher, formId: createProjectFormId});
+    const form2 = createProjectFormCreator({dispatcher: internalDispatcher, formId: createProjectFormId2});
 
     internalDispatcher.addListener({
         eventId: packagePrefix + "submitEvent", 
@@ -59,12 +63,8 @@ const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
 
     return (
         <div>
-            <CreateProjectForm 
-                dispatcher={internalDispatcher} 
-                formId={createProjectFormId}/>
-            <CreateProjectForm 
-                dispatcher={internalDispatcher} 
-                formId={createProjectFormId2}/>
+            {form1}
+            {form2}
         </div>
     )
 }

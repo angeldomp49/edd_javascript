@@ -4,6 +4,7 @@ import { SubmitCreateEvent } from '../../events/createProject/SubmitCreateEvent'
 import { packagePrefix } from '../../events/packagePrefix';
 import RefreshButton from '../refresh/RefreshButton';
 import CreateProjectPage from '../pages/CreateProjectPage';
+import CreateProjectForm from '../CreateProjectForm';
 
 
 const PageWrapper = ({}: {}) => {
@@ -20,7 +21,9 @@ const PageWrapper = ({}: {}) => {
     return (
         <div>
             <RefreshButton dispatcher={globalDispatcher} />
-            <CreateProjectPage dispatcher={globalDispatcher} />
+            <CreateProjectPage 
+                dispatcher={globalDispatcher} 
+                createProjectFormCreator={CreateProjectForm}/>
         </div>
     )
 }

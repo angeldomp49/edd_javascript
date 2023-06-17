@@ -6,7 +6,7 @@ import { Dispatcher } from '@makechtec/event_engine/dist/dispatcher/Dispatcher';
 import { SubmitCreateEvent } from '../events/createProject/SubmitCreateEvent';
 
 
-const CreateProjectForm = ({ dispatcher, formId }: { dispatcher: Dispatcher, formId: number }) => {
+const CreateProjectForm = ({ dispatcher, formId }: { dispatcher: Dispatcher, formId: number }): React.JSX.Element => {
 
 
 	const [projectName, setProjectName] = useState("");
