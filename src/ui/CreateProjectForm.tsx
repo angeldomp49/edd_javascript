@@ -6,7 +6,7 @@ import { Dispatcher } from '@makechtec/event_engine/dist/dispatcher/Dispatcher';
 import { SubmitCreateEvent } from '../events/createProject/SubmitCreateEvent';
 
 
-const CreateProjectForm = ({ dispatcher }: { dispatcher: Dispatcher }) => {
+const CreateProjectForm = ({ dispatcher, formId }: { dispatcher: Dispatcher, formId: number }) => {
 
 
 	const [projectName, setProjectName] = useState("");
@@ -16,8 +16,10 @@ const CreateProjectForm = ({ dispatcher }: { dispatcher: Dispatcher }) => {
 		eventId: packagePrefix + "updateFormInputValues", 
 		listener: (event: ClearFormEvent) => {
 
-			setProjectName(event.projectName);
-			setExampleCode(event.exampleCode);
+			if(event.formId === formId) {
+				setProjectName(event.projectName);
+				setExampleCode(event.exampleCode);
+			}
 
 		}
 	});

@@ -13,6 +13,9 @@ const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
 
     const submitCreateProjectFormEventId: string = packagePrefix + "submitCreateProjectFormEvent";
 
+    const createProjectFormId: number = 100;
+    const createProjectFormId2: number = 200;
+
     internalDispatcher.addListener({
         eventId: packagePrefix + "submitEvent", 
         listener: (event: SubmitCreateEvent) => dispatcher.dispatch({...event, id: submitCreateProjectFormEventId}) 
@@ -22,11 +25,21 @@ const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
 
         const event: ClearFormEvent = {
             id: packagePrefix + "updateFormInputValues",
+            formId: createProjectFormId,
             projectName: "",
             exampleCode: ""
         };
 
         internalDispatcher.dispatch(event);
+
+        const event2: ClearFormEvent = {
+            id: packagePrefix + "updateFormInputValues",
+            formId: createProjectFormId2,
+            projectName: "",
+            exampleCode: ""
+        };
+
+        internalDispatcher.dispatch(event2);
 
     },[]);
 
@@ -35,6 +48,7 @@ const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
         listener: (event: RefreshPageEvent) => {
             const updateFormValuesEvent: ClearFormEvent = {
                 id: packagePrefix + "updateFormInputValues",
+                formId: createProjectFormId,
                 projectName: "clean up!",
                 exampleCode: "clean up!"
             };
@@ -45,7 +59,12 @@ const CreateProjectPage = ({dispatcher}: {dispatcher: Dispatcher}) => {
 
     return (
         <div>
-            <CreateProjectForm dispatcher={internalDispatcher} />
+            <CreateProjectForm 
+                dispatcher={internalDispatcher} 
+                formId={createProjectFormId}/>
+            <CreateProjectForm 
+                dispatcher={internalDispatcher} 
+                formId={createProjectFormId2}/>
         </div>
     )
 }
