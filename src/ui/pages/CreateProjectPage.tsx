@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import CreateProjectForm from '../CreateProjectForm';
 import { Dispatcher } from '@makechtec/event_engine/dist/dispatcher/Dispatcher';
 import { packagePrefix } from '../../events/packagePrefix';
 import { ClearFormEvent } from '../../events/createProject/ClearFormEvent';
